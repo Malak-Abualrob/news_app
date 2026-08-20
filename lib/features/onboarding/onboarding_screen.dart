@@ -15,8 +15,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0XFFF5F5F5),
+        actions: [
+          if(currentIndex !=2)
+          TextButton(
+             onPressed: (){},
+             style: TextButton.styleFrom(
+             foregroundColor: Color(0XFFC53030),
+            ), 
+            child: Text('Skip',style: TextStyle(fontSize: 16)),
+          ),
+        ],
+      ),
       body: PageView.builder(
         controller: pageController,
+        onPageChanged: (int index){
+          setState(() {
+            currentIndex = index;
+          });
+        },
         itemCount: OnboardingModel.onboardingList.length,
         itemBuilder: (BuildContext context, int index) { 
           final OnboardingModel model = OnboardingModel.onboardingList[index];
@@ -24,17 +42,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: (){},
-                    style: TextButton.styleFrom(
-                      foregroundColor: Color(0XFFC53030),
-                    ), 
-                    child: Text('Skip',style: TextStyle(fontSize: 16)),
-                    
-                    )
-                  ),
                 Image.asset(model.image),
                 SizedBox(height: 24),
                 Text(
