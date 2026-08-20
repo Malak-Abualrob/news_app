@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/onboarding/models/onboarding_model.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  int currentIndex = 0;
+  PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
+        controller: pageController,
         itemCount: OnboardingModel.onboardingList.length,
         itemBuilder: (BuildContext context, int index) { 
           final OnboardingModel model = OnboardingModel.onboardingList[index];
@@ -45,8 +54,22 @@ class OnboardingScreen extends StatelessWidget {
                     color: Color(0XFF6E7191),
                     fontWeight: FontWeight.w400,                
                   ),
-                ),
-                  
+                ), 
+                  Spacer(),               
+                  ElevatedButton(onPressed:(){
+                    pageController.nextPage(duration: Duration(milliseconds: 30),
+                     curve: Curves.easeInOut,
+                     );
+                  }, 
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(MediaQuery.of(context).size.width , 52),
+                    backgroundColor: Color(0XFFC53030),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                  ),
+                  child: Text('Next'),
+                  ),
               ],
             ),
           );
