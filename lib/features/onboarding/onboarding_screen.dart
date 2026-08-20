@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/features/onboarding/models/onboarding_model.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -7,15 +8,16 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
-        itemCount: 3,
+        itemCount: OnboardingModel.onboardingList.length,
         itemBuilder: (BuildContext context, int index) { 
+          final OnboardingModel model = OnboardingModel.onboardingList[index];
           return  Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/onboarding1.png'),
+              Image.asset(model.image),
               SizedBox(height: 24),
               Text(
-                'Trending News ',
+                model.title,
                 style: TextStyle(
                   fontSize: 20, 
                   color: Color(0XFF4E4B66),
@@ -24,7 +26,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
               SizedBox(height: 12),
               Text(
-                'Stay in the loop with the biggest breaking stories in a stunning visual slider. Just swipe to explore what’s trending right now! ',
+                model.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16, 
