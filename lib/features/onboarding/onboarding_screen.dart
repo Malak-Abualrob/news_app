@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/features/onboarding/controller/onboarding_controller.dart';
 import 'package:news_app/features/onboarding/models/onboarding_model.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -72,24 +73,14 @@ class OnboardingScreen extends StatelessWidget {
                           ),
               ),
               Consumer<OnboardingController>(
-                builder: (BuildContext context, OnboardingController value, Widget? child) { 
-                  return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                  List.generate(3, 
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                    child: Container(
-                        height: 16,
-                        width: 16,
-                        decoration: BoxDecoration(
-                          color:value.currentIndex == index ? Color(0XFFC53030): Color(0XFFD3D3D3),
-                          shape: BoxShape.circle,
-                          ),              
-                      ),
-                  )
-                ),
-                );
+                builder: (BuildContext context, OnboardingController value, Widget? child) {
+                  return SmoothPageIndicator(    
+                     controller: value.pageController,     
+                     count:  3,    
+                     effect:  SwapEffect(
+                      activeDotColor: Color(0XFFC53030),
+                     ),     
+                   ); 
                  },
                 
               ),
