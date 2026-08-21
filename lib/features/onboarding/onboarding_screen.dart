@@ -75,34 +75,20 @@ class OnboardingScreen extends StatelessWidget {
                 builder: (BuildContext context, OnboardingController value, Widget? child) { 
                   return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 16,
-                      width: 16,
-                      decoration: BoxDecoration(
-                        color:value.currentIndex == 0 ? Color(0XFFC53030): Color(0XFFD3D3D3),
-                        shape: BoxShape.circle,
-                        ),              
-                    ),
-                    SizedBox(width: 6),
-                    Container(
-                      height: 16,
-                      width: 16,
-                      decoration: BoxDecoration(
-                        color: value.currentIndex == 1 ? Color(0XFFC53030): Color(0XFFD3D3D3),
-                        shape: BoxShape.circle,
-                        ),              
-                    ),
-                    SizedBox(width: 6),
-                    Container(
-                      height: 16,
-                      width: 16,
-                      decoration: BoxDecoration(
-                        color: value.currentIndex == 2 ? Color(0XFFC53030): Color(0XFFD3D3D3),
-                        shape: BoxShape.circle,
-                        ),              
-                    ),
-                  ],
+                  children:
+                  List.generate(3, 
+                  (index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                    child: Container(
+                        height: 16,
+                        width: 16,
+                        decoration: BoxDecoration(
+                          color:value.currentIndex == index ? Color(0XFFC53030): Color(0XFFD3D3D3),
+                          shape: BoxShape.circle,
+                          ),              
+                      ),
+                  )
+                ),
                 );
                  },
                 
