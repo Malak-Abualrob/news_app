@@ -30,62 +30,106 @@ class OnboardingScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: PageView.builder(
-          controller: controller.pageController,
-          onPageChanged: (int index){
-            context.read<OnboardingController>().onPageChanged(index);            
-          },
-          itemCount: OnboardingModel.onboardingList.length,
-          itemBuilder: (BuildContext context, int index) { 
-            final OnboardingModel model = OnboardingModel.onboardingList[index];
-            return  Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
-              child: Column(
-                children: [
-                  Image.asset(model.image),
-                  SizedBox(height: 24),
-                  Text(
-                    model.title,
-                    style: TextStyle(
-                      fontSize: 20, 
-                      color: Color(0XFF4E4B66),
-                      fontWeight: FontWeight.w700,                
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    model.description,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16, 
-                      color: Color(0XFF6E7191),
-                      fontWeight: FontWeight.w400,                
-                    ),
-                  ), 
-                    Spacer(),               
-                    Consumer<OnboardingController>(
-                      builder: (BuildContext context, OnboardingController value, Widget? child) { 
-                        return ElevatedButton(onPressed:(){
-                        controller.pageController.nextPage(duration: Duration(milliseconds: 30),
-                         curve: Curves.easeInOut,
-                         );
-                      }, 
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: Size(MediaQuery.of(context).size.width , 52),
-                        backgroundColor: Color(0XFFC53030),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: controller.pageController,
+                  onPageChanged: (int index){
+                    context.read<OnboardingController>().onPageChanged(index);            
+                  },
+                  itemCount: OnboardingModel.onboardingList.length,
+                itemBuilder: (BuildContext context, int index) { 
+                  final OnboardingModel model = OnboardingModel.onboardingList[index];
+                  return Column(
+                    children: [
+                      Image.asset(model.image),
+                      SizedBox(height: 24),
+                      Text(
+                        model.title,
+                        style: TextStyle(
+                          fontSize: 20, 
+                          color: Color(0XFF4E4B66),
+                          fontWeight: FontWeight.w700,                
                         ),
                       ),
-                      child: Text(value.isLastPage ? 'Get Started' : 'Next'),
-                      );
-                       },
-                    ),
-                ],
+                      SizedBox(height: 12),
+                      Text(
+                        model.description,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16, 
+                          color: Color(0XFF6E7191),
+                          fontWeight: FontWeight.w400,                
+                        ),
+                      ), 
+                        Spacer(),               
+                    ],
+                  );
+                },
+                          ),
               ),
-            );
-          },
+              Consumer<OnboardingController>(
+                builder: (BuildContext context, OnboardingController value, Widget? child) { 
+                  return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 16,
+                      width: 16,
+                      decoration: BoxDecoration(
+                        color:value.currentIndex == 0 ? Color(0XFFC53030): Color(0XFFD3D3D3),
+                        shape: BoxShape.circle,
+                        ),              
+                    ),
+                    SizedBox(width: 6),
+                    Container(
+                      height: 16,
+                      width: 16,
+                      decoration: BoxDecoration(
+                        color: value.currentIndex == 1 ? Color(0XFFC53030): Color(0XFFD3D3D3),
+                        shape: BoxShape.circle,
+                        ),              
+                    ),
+                    SizedBox(width: 6),
+                    Container(
+                      height: 16,
+                      width: 16,
+                      decoration: BoxDecoration(
+                        color: value.currentIndex == 2 ? Color(0XFFC53030): Color(0XFFD3D3D3),
+                        shape: BoxShape.circle,
+                        ),              
+                    ),
+                  ],
+                );
+                 },
+                
+              ),
+              SizedBox(height: 112),           
+              Consumer<OnboardingController>(
+                 builder: (BuildContext context, OnboardingController value, Widget? child) { 
+                    return ElevatedButton(onPressed:(){
+                    controller.pageController.nextPage(duration: Duration(milliseconds: 30),
+                       curve: Curves.easeInOut,
+                       );
+                    }, 
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(MediaQuery.of(context).size.width , 52),
+                      backgroundColor: Color(0XFFC53030),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                       ),
+                   ),
+                    child: Text(value.isLastPage ? 'Get Started' : 'Next'),
+                 );
+               },
+             ),
+            ],
+          ),
         ),
+      
       );
 
       },
