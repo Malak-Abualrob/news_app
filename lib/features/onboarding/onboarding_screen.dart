@@ -19,7 +19,7 @@ class OnboardingScreen extends StatelessWidget {
           actions: [
             Consumer<OnboardingController>(
               builder: (BuildContext context, OnboardingController value, Widget? child) { 
-                return value.currentIndex ==2 ? SizedBox() : TextButton(
+                return value.isLastPage ? SizedBox() : TextButton(
                  onPressed: (){},
                  style: TextButton.styleFrom(
                  foregroundColor: Color(0XFFC53030),
@@ -63,19 +63,23 @@ class OnboardingScreen extends StatelessWidget {
                     ),
                   ), 
                     Spacer(),               
-                    ElevatedButton(onPressed:(){
-                      controller.pageController.nextPage(duration: Duration(milliseconds: 30),
-                       curve: Curves.easeInOut,
-                       );
-                    }, 
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(MediaQuery.of(context).size.width , 52),
-                      backgroundColor: Color(0XFFC53030),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
+                    Consumer<OnboardingController>(
+                      builder: (BuildContext context, OnboardingController value, Widget? child) { 
+                        return ElevatedButton(onPressed:(){
+                        controller.pageController.nextPage(duration: Duration(milliseconds: 30),
+                         curve: Curves.easeInOut,
+                         );
+                      }, 
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(MediaQuery.of(context).size.width , 52),
+                        backgroundColor: Color(0XFFC53030),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
                       ),
-                    ),
-                    child: Text('Next'),
+                      child: Text(value.isLastPage ? 'Get Started' : 'Next'),
+                      );
+                       },
                     ),
                 ],
               ),
