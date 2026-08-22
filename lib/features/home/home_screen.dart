@@ -29,7 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
   getTopHeadLine()async{
   
     Map<String,dynamic> result = await apiService.get(
-      "top_headline?apiKey=4c7f59e7e06e4784875e498d1b2ef5e2&country=us");
+      "top_headline",
+      params: {
+        "country":"us"
+      },
+      );
 
     setState((){
           newsTopHeadLineList = (result["articles"] as List)
@@ -39,8 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   }
     getEverythinge()async{
-    Map<String,dynamic> result = await apiService.get(
-      "everything?apiKey=4c7f59e7e06e4784875e498d1b2ef5e2&q=news");
+
+      Map<String,dynamic> result = await apiService.get(
+      "everything",
+      params: {
+        "q":"news"
+      },
+      );
   
     setState((){
           newsEverythingList = (result["articles"] as List)
