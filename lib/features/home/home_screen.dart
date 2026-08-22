@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,9 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
   
     print(urlForTopHeadline);
 
-    final response= await http.get(urlForTopHeadline);
+    final http.Response response= await http.get(urlForTopHeadline);
 
-    print(response.statusCode);
+    Map<String,dynamic> result = jsonDecode(response.body) as Map<String,dynamic>;
+
+    //Map<key,value> => List<Map>.
+    print(result["articles"][0]);
+    print(result);
 
 
 
