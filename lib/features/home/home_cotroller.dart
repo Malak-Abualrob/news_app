@@ -17,7 +17,7 @@ class HomeController extends ChangeNotifier {
   List<NewsArticleModel> newsEverythingList = [];
   ApiService apiService = ApiService();
 
-  getTopHeadLine() async {
+  Future<void> getTopHeadLine() async {
     try {
       Map<String, dynamic> result = await apiService.get(
         ApiConfig.topHeadlines,
@@ -36,7 +36,7 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  getEverythinge() async {
+  Future<void> getEverythinge() async {
     try {
       Map<String, dynamic> result = await apiService.get(
         ApiConfig.everything,
