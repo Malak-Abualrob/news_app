@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:news_app/features/home/models/news_article_model.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  List<dynamic> list =[];
+  List<NewsArticleModel> newsArticleList =[];
 
   @override
   void initState() {
@@ -36,10 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
     Map<String,dynamic> result = jsonDecode(response.body) as Map<String,dynamic>;
 
     //Map<key,value> => List<Map>.
-    print(result["articles"][0]["description"]);
+    print(result["articles"]);
 
     setState((){
-          list = result["article"];
+          newsArticleList = (result["articles"] as List)
+          .map((e) => NewsArticleModel.fromJson(e))
+          .toList();
     });
 
 
@@ -58,9 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: list.length,
+              itemCount: newsArticleList.length,
               itemBuilder: (BuildContext context, int index) {
-              return Text(list[index]["title"] ?? "");
+              return Text(newsArticleList[index].title);
             },
             ),
           )
