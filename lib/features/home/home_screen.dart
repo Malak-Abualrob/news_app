@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  List<dynamic> list =[];
+
   @override
   void initState() {
     callEndpoint();
@@ -34,8 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
     Map<String,dynamic> result = jsonDecode(response.body) as Map<String,dynamic>;
 
     //Map<key,value> => List<Map>.
-    print(result["articles"][0]);
-    print(result);
+    print(result["articles"][0]["description"]);
+
+    setState((){
+          list = result["article"];
+    });
 
 
 
@@ -48,6 +53,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (BuildContext context, int index) {
+              return Text(list[index]["title"] ?? "");
+            },
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
