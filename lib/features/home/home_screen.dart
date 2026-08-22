@@ -18,6 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<NewsArticleModel> newsTopHeadLineList =[];
   List<NewsArticleModel> newsEverythingList =[];
   ApiService apiService = ApiService();
+  
+  bool isLoading= true;
+  String? errorMessage;
 
 
   @override
@@ -28,7 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getTopHeadLine()async{
-  
+    try{
+      setState(() {
+         isLoading= true;
+         errorMessage=null;
+      });
     Map<String,dynamic> result = await apiService.get(
       ApiConfig.topHeadlines,
       params: {
@@ -40,11 +47,23 @@ class _HomeScreenState extends State<HomeScreen> {
           newsTopHeadLineList = (result["articles"] as List)
           .map((e) => NewsArticleModel.fromJson(e))
           .toList();
+         isLoading= false;
+         errorMessage=null;
     });
 
+    }catch(e){
+      setState(() {
+      isLoading= false;
+      errorMessage = e.toString();
+      });
+    }
   }
     getEverythinge()async{
-
+      try{
+        setState(() {
+         isLoading= true;
+         errorMessage=null;
+        });
       Map<String,dynamic> result = await apiService.get(
       ApiConfig.everything,
       params: {
@@ -56,13 +75,28 @@ class _HomeScreenState extends State<HomeScreen> {
           newsEverythingList = (result["articles"] as List)
           .map((e) => NewsArticleModel.fromJson(e))
           .toList();
+         isLoading= false;
+         errorMessage=null;
     });
+
+      }catch(e){
+      setState(() {
+      isLoading= false;
+      errorMessage = e.toString();
+      });
+     }
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: 
+      (errorMessage?.isNotEmpty ?? false)
+      ?Center(child: Text(errorMessage!))
+      :isLoading
+      ?Center(child: CircularProgressIndicator()) :
+       Column(
         children: [
           Expanded(
             child: ListView.builder(

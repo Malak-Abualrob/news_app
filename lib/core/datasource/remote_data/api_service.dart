@@ -16,9 +16,14 @@ class ApiService {
       },
      );
   
-
+  try{
     final http.Response response= await http.get(url);
 
     return jsonDecode(response.body) as Map<String,dynamic>;
+  }catch(e){
+    throw Exception("Failed to load data");
+  }
+
+
   }
 }
