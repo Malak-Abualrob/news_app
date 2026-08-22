@@ -3,42 +3,41 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/datasource/remote_data/api_config.dart';
 import 'package:news_app/core/datasource/remote_data/api_service.dart';
+import 'package:news_app/features/home/home_cotroller.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    getTopHeadLine();
-    getEverythinge();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: (errorMessage?.isNotEmpty ?? false)
-          ? Center(child: Text(errorMessage!))
-          : isLoading
-          ? Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: newsTopHeadLineList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Text(newsTopHeadLineList[index].title);
-                    },
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => HomeController(),
+      child: Consumer<HomeController>(
+        builder: (BuildContext context, controller, Widget? child) {
+          return Scaffold(
+            body: (controller.errorMessage?.isNotEmpty ?? false)
+                ? Center(child: Text(controller.errorMessage!))
+                : controller.everthingLoading
+                ? Center(child: CircularProgressIndicator())
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: controller.newsTopHeadLineList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Text(
+                              controller.newsTopHeadLineList[index].title,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
+          );
+        },
+      ),
     );
   }
 }

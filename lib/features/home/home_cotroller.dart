@@ -4,6 +4,11 @@ import 'package:news_app/core/datasource/remote_data/api_service.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
 
 class HomeController extends ChangeNotifier {
+  HomeController() {
+    getTopHeadLine();
+    getEverythinge();
+  }
+
   bool topHeadlineLoading = true;
   bool everthingLoading = true;
   String? errorMessage;
