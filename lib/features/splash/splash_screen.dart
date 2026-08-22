@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final bool isLogin = PreferencesManager().getBool('isLogin') ?? false;
     if (!mounted) return;
     if (!onBoardingComplete) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       );
     } else if (!isLogin) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       );
     } else {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
