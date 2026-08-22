@@ -27,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
   
     print(urlForTopHeadline);
 
-    await http.get(urlForTopHeadline);
+    final response= await http.get(urlForTopHeadline);
+
+    print(response.statusCode);
 
 
 
