@@ -1,19 +1,17 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:news_app/core/datasource/remote_data/api_config.dart';
 
 class ApiService {
-
-  final String baseUrl= "newsapi.org";
-  final String apikey= "4c7f59e7e06e4784875e498d1b2ef5e2";
 
   Future<dynamic> get(String endpoint,{Map<String, dynamic>? params})async{
 
     var url = Uri.http(
-      baseUrl,
+      ApiConfig.baseUrl,
        "v2/$endpoint",
      {
-      "apikey":apikey,
+      "apikey":ApiConfig.apikey,
       ...? params,
       },
      );

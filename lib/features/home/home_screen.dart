@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/core/datasource/remote_data/api_config.dart';
 import 'package:news_app/core/datasource/remote_data/api_service.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
 
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   getTopHeadLine()async{
   
     Map<String,dynamic> result = await apiService.get(
-      "top_headline",
+      ApiConfig.topHeadlines,
       params: {
         "country":"us"
       },
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getEverythinge()async{
 
       Map<String,dynamic> result = await apiService.get(
-      "everything",
+      ApiConfig.everything,
       params: {
         "q":"news"
       },
