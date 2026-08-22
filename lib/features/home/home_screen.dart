@@ -19,7 +19,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   callEndpoint()async{
 
-    var urlForTopHeadline = Uri.https('newsapi.org', 'v2/top-headlines');
+    var urlForTopHeadline = Uri.https('newsapi.org','v2/top-headlines',
+      {"apikey": "4c7f59e7e06e4784875e498d1b2ef5e2",
+       "country": "us",
+      }
+      );
+  
+    print(urlForTopHeadline);
+
+    await http.get(urlForTopHeadline);
+
+
+
     // var response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
     // print('Response status: ${response.statusCode}');
     // print('Response body: ${response.body}');
