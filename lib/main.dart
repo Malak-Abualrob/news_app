@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/features/home/home_screen.dart';
 import 'package:news_app/features/onboarding/onboarding_screen.dart';
 import 'package:news_app/features/splash/splash_screen.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(),
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: OnboardingScreen(),
+      home: HomeScreen(),
     );
   }
 }
