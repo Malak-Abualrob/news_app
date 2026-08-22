@@ -14,15 +14,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  List<NewsArticleModel> newsArticleList =[];
+  List<NewsArticleModel> newsTopHeadLineList =[];
+  List<NewsArticleModel> newsEverythingList =[];
+
 
   @override
   void initState() {
-    callEndpoint();
+    getTopHeadLine();
+    getEverythinge();
     super.initState();
   }
 
-  callEndpoint()async{
+  getTopHeadLine()async{
 
     var urlForTopHeadline = Uri.https('newsapi.org','v2/top-headlines',
       {"apikey": "4c7f59e7e06e4784875e498d1b2ef5e2",
@@ -30,28 +33,38 @@ class _HomeScreenState extends State<HomeScreen> {
       }
       );
   
-    print(urlForTopHeadline);
 
     final http.Response response= await http.get(urlForTopHeadline);
 
     Map<String,dynamic> result = jsonDecode(response.body) as Map<String,dynamic>;
 
-    //Map<key,value> => List<Map>.
-    print(result["articles"]);
 
     setState((){
-          newsArticleList = (result["articles"] as List)
+          newsTopHeadLineList = (result["articles"] as List)
           .map((e) => NewsArticleModel.fromJson(e))
           .toList();
     });
 
+  }
+    getEverythinge()async{
+
+    var urlForTopHeadline = Uri.https('newsapi.org','v2/everything',
+      {"apikey": "4c7f59e7e06e4784875e498d1b2ef5e2",
+      "q": "news"
+      }
+      );
+  
+
+    final http.Response response= await http.get(urlForTopHeadline);
+
+    Map<String,dynamic> result = jsonDecode(response.body) as Map<String,dynamic>;
 
 
-    // var response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
-    // print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
-
-    // print(await http.read(Uri.https('example.com', 'foobar.txt')));
+    setState((){
+          newsEverythingList = (result["articles"] as List)
+          .map((e) => NewsArticleModel.fromJson(e))
+          .toList();
+    });
   }
 
   @override
@@ -61,9 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: newsArticleList.length,
+              itemCount: newsTopHeadLineList.length,
               itemBuilder: (BuildContext context, int index) {
-              return Text(newsArticleList[index].title);
+              return Text(newsTopHeadLineList[index].title);
             },
             ),
           )
