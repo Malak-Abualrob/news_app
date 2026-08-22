@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/datasource/local_data/preferences_manager.dart';
 import 'package:news_app/features/main/main_scrreen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PreferencesManager().init();
   runApp(const MyApp());
 }
 
