@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/datasource/local_data/preferences_manager.dart';
 import 'package:news_app/core/widgets/custom_text_form_feild.dart';
-import 'package:news_app/features/home/home_screen.dart';
+import 'package:news_app/features/main/main_scrreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({super.key});
@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+        MaterialPageRoute(builder: (BuildContext context) => MainScreen()),
       );
     }
   }
