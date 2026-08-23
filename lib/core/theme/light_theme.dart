@@ -8,6 +8,7 @@ ThemeData themeData = ThemeData(
   scaffoldBackgroundColor: Color(0xFFF5F5F5),
   primaryColor: LightColor.primaryColor,
   appBarTheme: AppBarTheme(backgroundColor: Color(0xFFFFFFFF)),
+  progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.black),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: LightColor.primaryColor,
