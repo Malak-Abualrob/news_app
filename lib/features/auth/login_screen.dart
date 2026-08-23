@@ -6,8 +6,8 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,63 +23,85 @@ class LoginScreen extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(child: Image.asset("assets/images/logo.png", height: 45)),
-              SizedBox(height: 40),
-              Text("Welcome to News", style: TextStyle(fontSize: 24)),
-              SizedBox(height: 24),
-              CustomTextFormField(
-                controller: emailController,
-                hintText: "malak@gmail.com",
-                title: "Email",
-              ),
-              SizedBox(height: 24),
-              CustomTextFormField(
-                controller: passwordController,
-                hintText: "********",
-                title: "Password",
-                obscureText: true,
-              ),
-              SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton(onPressed: () {}, child: Text("sign in")),
-              ),
-              SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account? ",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return RegisterScreen();
-                          },
-                        ),
-                      );
+          child: Form(
+            key: _form,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Image.asset("assets/images/logo.png", height: 45),
+                ),
+                SizedBox(height: 40),
+                Text("Welcome to News", style: TextStyle(fontSize: 24)),
+                SizedBox(height: 24),
+                CustomTextFormField(
+                  controller: emailController,
+                  hintText: "malak@gmail.com",
+                  title: "Email",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter your email";
+                    }
+                    RegExp regex = RegExp(
+                      r"^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                    );
+                    if (!regex.hasMatch(value)) {
+                      return "Please enter a valid email";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 24),
+                CustomTextFormField(
+                  controller: passwordController,
+                  hintText: "********",
+                  title: "Password",
+                  obscureText: true,
+                ),
+                SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_form.currentState?.validate() ?? false) {}
                     },
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16,
+                    child: Text("sign in"),
+                  ),
+                ),
+                SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account? ",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    SizedBox(width: 8),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return RegisterScreen();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Sign up",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
