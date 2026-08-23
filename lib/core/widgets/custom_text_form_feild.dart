@@ -32,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
           validator: validator != null
               ? (String? value) => validator!(value)
               : null,
-          decoration: InputDecoration(hintText: hintText, suffix: suffix),
+          decoration: InputDecoration(hintText: hintText, suffixIcon: suffix),
         ),
       ],
     );

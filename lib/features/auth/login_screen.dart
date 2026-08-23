@@ -9,9 +9,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   bool isVisible = false;
 
@@ -38,13 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
               Text("Welcome to News", style: TextStyle(fontSize: 24)),
               SizedBox(height: 16),
               CustomTextFormField(
-                controller: _emailController,
+                controller: emailController,
                 hintText: "malak@gmail.com",
                 title: "Email",
               ),
               SizedBox(height: 16),
               CustomTextFormField(
-                controller: _passwordController,
+                controller: passwordController,
                 hintText: "********",
                 title: "Password",
                 suffix: IconButton(
