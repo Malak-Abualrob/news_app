@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/widgets/custom_text_form_feild.dart';
+import 'package:news_app/features/auth/register_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
@@ -63,7 +59,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(width: 8),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return RegisterScreen();
+                          },
+                        ),
+                      );
+                    },
                     child: Text(
                       "Sign up",
                       style: TextStyle(
