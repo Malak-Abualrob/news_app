@@ -58,6 +58,12 @@ class LoginScreen extends StatelessWidget {
                   hintText: "********",
                   title: "Password",
                   obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter your password";
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 24),
                 SizedBox(
