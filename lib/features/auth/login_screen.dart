@@ -34,20 +34,46 @@ class _LoginScreenState extends State<LoginScreen> {
               Center(child: Image.asset("assets/images/logo.png", height: 45)),
               SizedBox(height: 40),
               Text("Welcome to News", style: TextStyle(fontSize: 24)),
-              SizedBox(height: 16),
+              SizedBox(height: 24),
               CustomTextFormField(
                 controller: emailController,
                 hintText: "malak@gmail.com",
                 title: "Email",
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 24),
               CustomTextFormField(
                 controller: passwordController,
                 hintText: "********",
                 title: "Password",
                 obscureText: true,
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(onPressed: () {}, child: Text("sign in")),
+              ),
+              SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account? ",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  SizedBox(width: 8),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Sign up",
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

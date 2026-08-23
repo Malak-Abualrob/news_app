@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/theme/light_color.dart';
 
 ThemeData themeData = ThemeData(
+  useMaterial3: true,
+  brightness: Brightness.light,
+  colorScheme: ColorScheme.light(),
+  scaffoldBackgroundColor: Color(0xFFF5F5F5),
+  primaryColor: LightColor.primaryColor,
+  appBarTheme: AppBarTheme(backgroundColor: Color(0xFFFFFFFF)),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: LightColor.primaryColor,
