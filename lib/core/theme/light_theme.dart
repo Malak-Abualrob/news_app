@@ -22,4 +22,31 @@ ThemeData themeData = ThemeData(
     unselectedItemColor: Color(0xFF363636),
     showUnselectedLabels: true,
   ),
+
+  inputDecorationTheme: InputDecorationTheme(
+    hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
+    filled: true,
+    fillColor: Color(0xFFFFFFFF),
+    focusColor: Color(0xFFD1DAD6),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFE0E0E0)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.5),
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.5),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.5),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.5),
+    ),
+  ),
 );

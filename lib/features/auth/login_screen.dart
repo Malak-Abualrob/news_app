@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/widgets/custom_text_form_feild.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
+
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +36,29 @@ class LoginScreen extends StatelessWidget {
               Center(child: Image.asset("assets/images/logo.png", height: 45)),
               SizedBox(height: 40),
               Text("Welcome to News", style: TextStyle(fontSize: 24)),
-              SizedBox(height: 10),
-              Text(
-                "Login to your account",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                controller: _emailController,
+                hintText: "malak@gmail.com",
+                title: "Email",
               ),
-              SizedBox(height: 20),
-              TextFormField(decoration: InputDecoration(labelText: "Email")),
-              TextFormField(decoration: InputDecoration(labelText: "Password")),
-              ElevatedButton(onPressed: () {}, child: Text("Login")),
-              TextButton(
-                onPressed: () {},
-                child: Text("Don't have an account? Register"),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                controller: _passwordController,
+                hintText: "********",
+                title: "Password",
+                suffix: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isVisible = !isVisible;
+                    });
+                  },
+                  icon: isVisible
+                      ? Icon(Icons.visibility_off)
+                      : Icon(Icons.visibility),
+                ),
               ),
+              SizedBox(height: 16),
             ],
           ),
         ),
