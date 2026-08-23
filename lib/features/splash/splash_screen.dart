@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/datasource/local_data/preferences_manager.dart';
 import 'package:news_app/features/home/home_screen.dart';
 import 'package:news_app/features/onboarding/onboarding_screen.dart';
-import 'package:news_app/features/login/login_screen.dart';
+import 'package:news_app/features/auth/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
