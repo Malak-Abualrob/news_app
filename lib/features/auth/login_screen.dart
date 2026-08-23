@@ -13,8 +13,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController passwordController = TextEditingController();
 
-  bool isVisible = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,16 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: passwordController,
                 hintText: "********",
                 title: "Password",
-                suffix: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-                  icon: isVisible
-                      ? Icon(Icons.visibility_off)
-                      : Icon(Icons.visibility),
-                ),
+                obscureText: true,
               ),
               SizedBox(height: 16),
             ],
